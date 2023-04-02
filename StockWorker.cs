@@ -7,8 +7,23 @@ namespace Atento
 			while (true)
 			{
 				decimal stockPrice = await ApiWrapper.MockGetStockPrice(stockSymbol);
-				Console.WriteLine($"The stock price for {stockSymbol} is currently ${stockPrice}");
 
+				// These flags will be used to avoid sending multiple
+				// emails suggesting the same thing
+				bool shouldSendSellEmail = true;
+				bool shouldSendBuyEmail = true;
+				if (stockPrice > priceToSell && shouldSendSellEmail)
+				{
+					Email.MockSendEmail(Email.StockActionType.Buy, stockSymbol, stockPrice);
+					shouldSendBuyEmail = true;
+					shouldSendSellEmail = false;
+				}
+				if (stockPrice < priceToBuy && shouldSendBuyEmail)
+				{
+					Email.MockSendEmail(Email.StockActionType.Sell, stockSymbol, stockPrice);
+					shouldSendSellEmail = true;
+					shouldSendBuyEmail = false;
+				}
 			}
 		}
 	}
