@@ -16,7 +16,7 @@ namespace Atento
 		// }
 		public async static Task<decimal> MockGetStockPrice(string stockSymbol)
 		{
-			await Task.Delay(300);
+			await Task.Delay(1000);
 			decimal mockStockPrice = randomDecimal(4, 5);
 			return mockStockPrice;
 		}
