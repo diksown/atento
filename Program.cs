@@ -12,11 +12,12 @@
 				$"Exemplo: {programName} PETR4 22.67 22.59";
 			if (invalidCommand)
 			{
-				helpMessage = description + "\n\n" + helpMessage;
+				helpMessage = invalidCommandMessage + "\n\n" + helpMessage;
 			}
 			else
 			{
-				helpMessage = invalidCommandMessage + "\n\n" + helpMessage;
+				helpMessage = description + "\n\n" + helpMessage;
+
 			}
 			Console.WriteLine(helpMessage);
 		}
