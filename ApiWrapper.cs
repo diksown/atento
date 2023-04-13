@@ -1,3 +1,6 @@
+using Newtonsoft.Json.Linq;
+
+
 namespace Atento
 {
 	class ApiWrapper
@@ -19,6 +22,20 @@ namespace Atento
 			await Task.Delay(100);
 			decimal mockStockPrice = randomDecimal(4, 5);
 			return mockStockPrice;
+		}
+
+		public async static Task<decimal> getStockPrice(string stockSymbol)
+		{
+			using var client = new HttpClient();
+
+			var response = await client.GetAsync($"https://brapi.dev/api/quote/{stockSymbol}");
+			var content = await response.Content.ReadAsStringAsync();
+
+			JObject json = JObject.Parse(content);
+
+			decimal stockPrice = Convert.ToDecimal((string)json["results"][0]["regularMarketPrice"]);
+
+			return stockPrice;
 		}
 	}
 }

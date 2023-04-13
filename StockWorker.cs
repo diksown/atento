@@ -14,7 +14,7 @@ namespace Atento
 
 			while (true)
 			{
-				stockPrice = await ApiWrapper.MockGetStockPrice(stockSymbol);
+				stockPrice = await ApiWrapper.getStockPrice(stockSymbol);
 
 				System.Console.WriteLine("Price is " + stockPrice);
 
