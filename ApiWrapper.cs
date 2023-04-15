@@ -28,13 +28,23 @@ namespace Atento
 		{
 			using var client = new HttpClient();
 
-			var response = await client.GetAsync($"https://brapi.dev/api/quote/{stockSymbol}");
-			var content = await response.Content.ReadAsStringAsync();
+			HttpResponseMessage response = await client.GetAsync($"https://brapi.dev/api/quote/{stockSymbol}");
+			string content = await response.Content.ReadAsStringAsync();
 
 			JObject json = JObject.Parse(content);
 
-			decimal stockPrice = Convert.ToDecimal((string)json["results"][0]["regularMarketPrice"]);
+			string? stockPriceFromApi = (string)json["results"][0]["regularMarketPrice"];
 
+			decimal stockPrice = Convert.ToDecimal((string)json["results"][0]["regularMarketPrice"]);
+			if (json["results"][0]["regularMarketPrice"] != null)
+			{
+				var price = (double)json["results"][0]["regularMarketPrice"];
+				// do something with the non-null price value
+			}
+			else
+			{
+				// handle the case where the value is null
+			}
 			return stockPrice;
 		}
 	}
