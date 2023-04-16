@@ -4,7 +4,13 @@ namespace Atento
 	{
 		private static int TimeBetweenApiCalls = 1000;
 
-		public static async Task watchStock(string stockSymbol, decimal priceToSell, decimal priceToBuy)
+        private readonly IEmailSender _emailSender;
+        public Worker(IEmailSender emailSender)
+        {
+            _emailSender = emailSender;
+        }
+
+        public static async Task watchStock(string stockSymbol, decimal priceToSell, decimal priceToBuy)
 		{
 			// These flags will be used to avoid sending multiple
 			// emails suggesting the same thing
