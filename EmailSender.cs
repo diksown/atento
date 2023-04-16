@@ -37,7 +37,7 @@ namespace Atento
 			using (SmtpClient smtp = new SmtpClient(_emailSettings.PrimaryDomain, _emailSettings.PrimaryPort))
 			{
 				smtp.Credentials = new NetworkCredential(_emailSettings.SenderEmail, _emailSettings.SenderPassword);
-				smtp.EnableSsl = true;
+				// smtp.EnableSsl = true;
 				await smtp.SendMailAsync(mail);
 			}
 		}
