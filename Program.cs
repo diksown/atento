@@ -1,4 +1,6 @@
-﻿namespace Atento
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Atento
 {
 	class Program
 	{
@@ -22,7 +24,12 @@
 			Console.WriteLine(helpMessage);
 		}
 
-		static async Task Main(string[] args)
+        public static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddScoped<IEmailSender, EmailSender>();
+        }
+
+        static async Task Main(string[] args)
 		{
 			if (args.Length == 0)
 			{
