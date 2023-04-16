@@ -17,7 +17,7 @@ namespace Atento
 		// public async static Task<decimal> GetStockPrice(string stockSymbol)
 		// {
 		// }
-		public async static Task<decimal> MockGetStockPrice(string stockSymbol)
+		public async static Task<decimal> mockGetStockPrice(string stockSymbol)
 		{
 			await Task.Delay(100);
 			decimal mockStockPrice = randomDecimal(4, 5);
@@ -33,7 +33,7 @@ namespace Atento
 
 			JObject json = JObject.Parse(content);
 
-			string? stockPriceFromApi = (string)json["results"][0]["regularMarketPrice"];
+			string stockPriceFromApi = (string)json["results"][0]["regularMarketPrice"];
 
 			decimal stockPrice = Convert.ToDecimal((string)json["results"][0]["regularMarketPrice"]);
 			if (json["results"][0]["regularMarketPrice"] != null)

@@ -11,17 +11,18 @@ namespace Atento
 			bool shouldSendSellEmail = true;
 			bool shouldSendBuyEmail = true;
 			decimal stockPrice = 0;
+			EmailSender sender = new EmailSender();
 
 			while (true)
 			{
-				stockPrice = await ApiWrapper.getStockPrice(stockSymbol);
+				stockPrice = await ApiWrapper.mockGetStockPrice(stockSymbol);
 
 				System.Console.WriteLine("Price is " + stockPrice);
 
 				if (stockPrice > priceToSell && shouldSendSellEmail)
 				{
-					Email.MockSendEmail(
-						Email.StockActionType.Sell,
+					await sender.sendNotificationEmail(
+						EmailSender.StockActionType.Sell,
 						stockSymbol,
 						stockPrice,
 						priceToSell
@@ -31,8 +32,8 @@ namespace Atento
 
 				if (stockPrice < priceToBuy && shouldSendBuyEmail)
 				{
-					Email.MockSendEmail(
-						Email.StockActionType.Buy,
+					await sender.sendNotificationEmail(
+						EmailSender.StockActionType.Buy,
 						stockSymbol,
 						stockPrice,
 						priceToBuy
