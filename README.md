@@ -39,9 +39,9 @@ dotnet run -- <ativo> <preco_para_venda> <preco_para_compra>
 ```
 
 Onde:
-`ativo` é o código do ativo a ser monitorado
-`preco_para_venda` é o preço de referência para venda
-`preco_para_compra` é o preço de referência para compra
+- `ativo` é o código do ativo a ser monitorado
+- `preco_para_venda` é o preço de referência para venda
+- `preco_para_compra` é o preço de referência para compra
 
 ### Exemplo:
 
