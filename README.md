@@ -23,12 +23,13 @@ Depois, mude o `appsettings.json` para as suas configurações pessoais.
 ```yaml
 {
   "toEmail": "to@example.com",
-  "smtpConfig": {
-    "primaryDomain": "smtp.gmail.com",
-    "primaryPort": 587,
-    "senderEmail": "sender@example.com",
-    "senderPassword": "password"
-  }
+  "smtpConfig":
+    {
+      "primaryDomain": "smtp.gmail.com",
+      "primaryPort": 587,
+      "senderEmail": "sender@example.com",
+      "senderPassword": "password",
+    },
 }
 ```
 
@@ -47,4 +48,21 @@ Onde:
 
 ```bash
 dotnet run -- PETR4 22.67 22.59
+```
+
+## Desenvolvimento local
+
+Para fins de testes locais, você pode iniciar um servidor SMTP em Python:
+
+```py
+python -m smtpd -c DebuggingServer -n localhost:1025
+```
+
+E setar o `appsettings.json` com:
+
+```yml
+...
+  "primaryDomain": "localhost",
+  "primaryPort": 1025,
+...
 ```

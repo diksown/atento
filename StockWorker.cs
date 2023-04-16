@@ -17,7 +17,7 @@ namespace Atento
 			{
 				stockPrice = await ApiWrapper.mockGetStockPrice(stockSymbol);
 
-				System.Console.WriteLine("Price is " + stockPrice);
+				System.Console.WriteLine($"Valor do ativo {stockSymbol}: " + stockPrice);
 
 				if (stockPrice > priceToSell && shouldSendSellEmail)
 				{

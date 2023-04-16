@@ -5,12 +5,12 @@ namespace Atento
 {
 	class ApiWrapper
 	{
-		public static decimal randomDecimal(int smallest, int biggest)
+		public static decimal randomDecimal(decimal smallest, decimal biggest)
 		{
 			Random rng = new Random();
 			int decimalPlaces = 2;
 			int powerOfTen = (int)Math.Pow(10, decimalPlaces);
-			return (decimal)rng.Next(smallest * powerOfTen, biggest * powerOfTen) / powerOfTen;
+			return (decimal)rng.Next((int)(smallest * powerOfTen), (int)(biggest * powerOfTen)) / powerOfTen;
 		}
 
 		// // TODO
@@ -20,7 +20,7 @@ namespace Atento
 		public async static Task<decimal> mockGetStockPrice(string stockSymbol)
 		{
 			await Task.Delay(100);
-			decimal mockStockPrice = randomDecimal(4, 5);
+			decimal mockStockPrice = randomDecimal(22.54M, 22.70M);
 			return mockStockPrice;
 		}
 
