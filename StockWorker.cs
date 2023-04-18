@@ -2,7 +2,7 @@ namespace Atento
 {
 	class Worker
 	{
-		private static int TimeBetweenApiCalls = 1000;
+		private static int TimeBetweenApiCalls = 1000 * 60 * 5; // One request each 5 min
 
 		public static async Task watchStock(string stockSymbol, decimal priceToSell, decimal priceToBuy)
 		{
@@ -15,7 +15,7 @@ namespace Atento
 
 			while (true)
 			{
-				stockPrice = await ApiWrapper.mockGetStockPrice(stockSymbol);
+				stockPrice = await ApiWrapper.getStockPrice(stockSymbol);
 
 				System.Console.WriteLine($"Valor do ativo {stockSymbol}: " + stockPrice);
 

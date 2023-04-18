@@ -13,10 +13,6 @@ namespace Atento
 			return (decimal)rng.Next((int)(smallest * powerOfTen), (int)(biggest * powerOfTen)) / powerOfTen;
 		}
 
-		// // TODO
-		// public async static Task<decimal> GetStockPrice(string stockSymbol)
-		// {
-		// }
 		public async static Task<decimal> mockGetStockPrice(string stockSymbol)
 		{
 			await Task.Delay(100);
@@ -36,15 +32,7 @@ namespace Atento
 			string stockPriceFromApi = (string)json["results"][0]["regularMarketPrice"];
 
 			decimal stockPrice = Convert.ToDecimal((string)json["results"][0]["regularMarketPrice"]);
-			if (json["results"][0]["regularMarketPrice"] != null)
-			{
-				var price = (double)json["results"][0]["regularMarketPrice"];
-				// do something with the non-null price value
-			}
-			else
-			{
-				// handle the case where the value is null
-			}
+
 			return stockPrice;
 		}
 	}

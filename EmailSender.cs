@@ -33,11 +33,13 @@ namespace Atento
 			mail.To.Add(new MailAddress(_emailSettings.ToEmail));
 			mail.Subject = subject;
 			mail.Body = body;
-			// mail.IsBodyHtml = true;
 			using (SmtpClient smtp = new SmtpClient(_emailSettings.PrimaryDomain, _emailSettings.PrimaryPort))
 			{
 				smtp.Credentials = new NetworkCredential(_emailSettings.SenderEmail, _emailSettings.SenderPassword);
-				// smtp.EnableSsl = true;
+				if (_emailSettings.PrimaryDomain != "localhost")
+				{
+					smtp.EnableSsl = true;
+				}
 				await smtp.SendMailAsync(mail);
 			}
 		}
@@ -88,7 +90,14 @@ namespace Atento
 			string emailTitle = emailTitleTemplate(emailType, stockSymbol, curStockPrice);
 			string emailBody = emailBodyTemplate(emailType, stockSymbol, curStockPrice, priceLimit);
 
-			await sendEmailAsync(emailTitle, emailBody);
+			try
+			{
+				await sendEmailAsync(emailTitle, emailBody);
+			}
+			catch
+			{
+				Console.WriteLine("Falha no envio de e-mails. Verifique se appsettings.json está configurado corretamente.");
+			}
 		}
 	}
 }
