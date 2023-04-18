@@ -28,10 +28,12 @@ Depois, mude o `appsettings.json` para as suas configurações pessoais.
       "primaryDomain": "smtp.gmail.com",
       "primaryPort": 587,
       "senderEmail": "sender@example.com",
-      "senderPassword": "password",
+      "senderPassword": "password",		
     },
 }
 ```
+
+Se  serviço escolhido for o gmail, você pode conferir instruções de geração de senha (o campo `senderPassword`) em https://stackoverflow.com/a/32336
 
 ## Uso
 
